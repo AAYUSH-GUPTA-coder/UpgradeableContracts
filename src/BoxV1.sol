@@ -5,7 +5,7 @@ import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/U
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract BoxV1 is UUPSUpgradeable, Initializable, OwnableUpgradeable {
+contract BoxV1 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     uint256 internal number;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -13,8 +13,8 @@ contract BoxV1 is UUPSUpgradeable, Initializable, OwnableUpgradeable {
         _disableInitializers();
     }
 
-    function initialize() public initializer {
-        __Ownable_init(); // Sets the owner of the contract to the sender
+    function initialize(address _owner) public initializer {
+        __Ownable_init(_owner); // Sets the owner of the contract to the sender
         __UUPSUpgradeable_init(); // This function do nothing, but it is a good practice to have it to call this is UUPS upgradable contract and we are treating it as such
     }
 
