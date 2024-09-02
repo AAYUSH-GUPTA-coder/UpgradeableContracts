@@ -13,8 +13,8 @@ contract BoxV2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         _disableInitializers();
     }
 
-    function initialize() public initializer {
-        __Ownable_init(); // Sets the owner of the contract to the sender
+    function initialize(address _owner) public initializer {
+        __Ownable_init(_owner); // Sets the owner of the contract to the sender
         __UUPSUpgradeable_init(); // This function do nothing, but it is a good practice to have it to call this is UUPS upgradable contract and we are treating it as such
     }
 
@@ -30,5 +30,7 @@ contract BoxV2 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         return 2;
     }
 
-    function _authorizeUpgrade(address newImplementation) internal override {}
+    function _authorizeUpgrade(
+        address newImplementation
+    ) internal override onlyOwner {}
 }
